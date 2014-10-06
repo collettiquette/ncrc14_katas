@@ -1,5 +1,4 @@
 class RomanNumeralTranslator
-  attr_reader :roman_numerals
   ROMAN_DICTIONARY = { I: 1, 
                        V: 5, 
                        X: 10,
@@ -13,16 +12,41 @@ class RomanNumeralTranslator
   end
 
   def initialize(roman_numerals)
-    @roman_numerals = roman_numerals
+    @roman_numerals = roman_numerals.split("")
+    @total_arabic_value = 0
   end
 
   def translate
-    #We need to find the relationship between I and V next
-    #to eachother. After we know they are next to eachother,
-    #we need to know the order.
+    @roman_numerals.each_with_index do |r,i|
+      add_or_subtract_numeral(r,i) if @roman_numerals[i+1]
+    end
+    @total_arabic_value += arabic_value_of(@roman_numerals.last)
+  end
 
-    ROMAN_DICTIONARY[roman_numerals]
+  private
 
+  def add_or_subtract_numeral(numeral,index)
+    if numeral_larger_than_next?(numeral,index)
+      add_arabic_value_of(numeral)
+    else
+      subtract_arabic_value_of(numeral)
+    end
+  end
+
+  def numeral_larger_than_next?(numeral,index)
+    arabic_value_of(numeral) >= arabic_value_of(@roman_numerals[index+1])
+  end
+
+  def add_arabic_value_of(numeral)
+    @total_arabic_value += arabic_value_of(numeral)
+  end
+
+  def subtract_arabic_value_of(numeral)
+    @total_arabic_value -= arabic_value_of(numeral)
+  end
+
+  def arabic_value_of(numeral)
+    ROMAN_DICTIONARY[numeral.to_sym]
   end
 
 end
