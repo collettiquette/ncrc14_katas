@@ -2,6 +2,7 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 require 'rspec'
 require 'roman_numeral_translator.rb'
+require 'roman_numeral_generator.rb'
 
 describe RomanNumeralTranslator do
   describe "#translate" do
@@ -32,6 +33,39 @@ describe RomanNumeralTranslator do
 
     it "takes MDCLXVI and returns 1666" do
       expect(described_class.translate("MDCLXVI")).to eq(1666)
+    end
+  end
+end
+
+describe RomanNumeralGenerator do
+  describe "#generate" do
+
+    it "takes 1 and returns I" do
+      expect(described_class.generate(1)).to eq("I")
+    end
+
+    it "takes 5 and returns V" do
+      expect(described_class.generate(5)).to eq("V")
+    end
+
+    it "takes 4 and returns IV" do
+      expect(described_class.generate(4)).to eq("IV")
+    end
+
+    it "takes 12 and returns XII" do
+      expect(described_class.generate(12)).to eq("XII")
+    end
+
+    it "takes 14 and returns XIV" do
+      expect(described_class.generate(14)).to eq("XIV")
+    end
+
+    it "takes 3600 and returns MMMDC" do
+      expect(described_class.generate(3600)).to eq("MMMDC")
+    end
+
+    it "takes 1666 and returns MDCLXVI" do
+      expect(described_class.generate(1666)).to eq("MDCLXVI")
     end
   end
 end
