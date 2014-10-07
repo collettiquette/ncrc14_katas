@@ -20,7 +20,7 @@ class RomanNumeralTranslator
     @roman_numerals.each_with_index do |r,i|
       add_or_subtract_numeral(r,i) if @roman_numerals[i+1]
     end
-    @total_arabic_value += arabic_value_of(@roman_numerals.last)
+    add_arabic_value_of(@roman_numerals.last)
   end
 
   private
