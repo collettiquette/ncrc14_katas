@@ -30,11 +30,32 @@ class RomanNumeralGenerator
       @num %= amount
       break if @num == 0
     end
-    @roman_numeral
+    cleanup_numeral
   end
 
   def numeral_amounts
     [1000, 500, 100, 50, 10, 5, 1]
+  end
+
+  def cleanup_numeral
+    num_count = 0
+    cur_numeral = ""
+    @roman_numeral.each_with_index do |numeral,i|
+      if cur_numeral == numeral
+        num_count += 1
+      else
+        cur_numeral = numeral
+        num_count = 1
+      end
+
+      if num_count == 4
+        next_numeral_amount = (RomanNumeralTranslator::ROMAN_DICTIONARY[numeral.to_sym]*5).to_s
+        (1..3).each {|j| @roman_numeral[i-j] = "" }
+        @roman_numeral[i] = numeral
+        @roman_numeral[i+1] = ROMAN_DICTIONARY[next_numeral_amount]
+      end
+    end
+    @roman_numeral
   end
 
 end
