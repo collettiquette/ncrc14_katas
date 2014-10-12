@@ -67,5 +67,9 @@ describe RomanNumeralGenerator do
     it "takes 1666 and returns MDCLXVI" do
       expect(described_class.generate(1666)).to eq("MDCLXVI")
     end
+
+    it "takes 4500 and returns MMMMD" do
+      expect(described_class.generate(4500)).to eq("MMMMD")
+    end
   end
 end

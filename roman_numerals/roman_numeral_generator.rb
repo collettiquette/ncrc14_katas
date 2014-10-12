@@ -48,7 +48,7 @@ class RomanNumeralGenerator
         num_count = 1
       end
 
-      if num_count == 4
+      if num_count == 4 && numeral != "M"
         next_numeral_amount = (RomanNumeralTranslator::ROMAN_DICTIONARY[numeral.to_sym]*5).to_s
         (1..3).each {|j| @roman_numeral[i-j] = "" }
         @roman_numeral[i] = numeral
