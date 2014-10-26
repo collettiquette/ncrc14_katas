@@ -34,13 +34,15 @@ class RomanNumeralGenerator
   end
 
   def numeral_amounts
-    [1000, 500, 100, 50, 10, 5, 1]
+    ROMAN_DICTIONARY.keys.reverse.map(&:to_i)
   end
 
   def cleanup_numeral
     num_count = 0
     cur_numeral = ""
+
     @roman_numeral.each_with_index do |numeral,i|
+      
       if cur_numeral == numeral
         num_count += 1
       else
