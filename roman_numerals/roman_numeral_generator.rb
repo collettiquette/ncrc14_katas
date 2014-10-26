@@ -37,25 +37,30 @@ class RomanNumeralGenerator
     ROMAN_DICTIONARY.keys.reverse.map(&:to_i)
   end
 
+  def next_numeral_amount(numeral)
+    (RomanNumeralTranslator::ROMAN_DICTIONARY[numeral.to_sym]*5).to_s
+  end
+
+  def correct_numeral_syntax(numeral,index)
+    (1..3).each {|j| @roman_numeral[index-j] = "" }
+    @roman_numeral[index] = numeral
+    @roman_numeral[index+1] = ROMAN_DICTIONARY[next_numeral_amount(numeral)]
+  end
+
   def cleanup_numeral
     num_count = 0
-    cur_numeral = ""
+    cur = ""
 
     @roman_numeral.each_with_index do |numeral,i|
       
-      if cur_numeral == numeral
+      if cur == numeral
         num_count += 1
       else
-        cur_numeral = numeral
+        cur = numeral
         num_count = 1
       end
 
-      if num_count == 4 && numeral != "M"
-        next_numeral_amount = (RomanNumeralTranslator::ROMAN_DICTIONARY[numeral.to_sym]*5).to_s
-        (1..3).each {|j| @roman_numeral[i-j] = "" }
-        @roman_numeral[i] = numeral
-        @roman_numeral[i+1] = ROMAN_DICTIONARY[next_numeral_amount]
-      end
+      correct_numeral_syntax(numeral,i) if num_count == 4 && numeral != "M"
     end
     @roman_numeral
   end
