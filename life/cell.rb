@@ -1,8 +1,8 @@
 class Cell
-  attr_accessor :state
+  attr_accessor :alive
 
   def initialize(is_alive)
-    @state = is_alive 
+    @alive = is_alive
   end
 
   def process_alive_count(neighbors)
@@ -11,20 +11,20 @@ class Cell
 
   def tick
     if @alive_count == 3
-      @state = true
+      @alive = true
     elsif @alive_count.between?(0,1)
-      @state = false
+      @alive = false
     elsif @alive_count > 3
-      @state = false
+      @alive = false
     end
   end
 
   def alive?
-    @state
+    @alive
   end
 
   def to_s
-    @state ? "x" : "."
+    @alive ? "x" : "."
   end
 
 end

@@ -1,12 +1,6 @@
 class Grid
   def initialize
-    @cells = []
-    35.times do |row|
-      @cells.push []
-      100.times do |cell|
-        @cells[row].push(Cell.new([true,false].sample))
-      end
-    end
+    @cells = Array.new(35) { Array.new(100) { Cell.new([true,false].sample) } }
   end
 
   def tick
