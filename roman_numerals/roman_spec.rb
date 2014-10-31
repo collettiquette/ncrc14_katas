@@ -1,10 +1,12 @@
 $LOAD_PATH << File.dirname(__FILE__)
 
 require 'rspec'
-require 'roman_numeral_translator.rb'
-require 'roman_numeral_generator.rb'
+require 'roman_numeral.rb'
+require 'roman_numeral/translator.rb'
+require 'roman_numeral/generator.rb'
+require 'roman_numeral/parser.rb'
 
-describe RomanNumeralTranslator do
+describe RomanNumeral::Translator do
   describe "#translate" do
 
     it "takes I and returns 1" do
@@ -37,7 +39,7 @@ describe RomanNumeralTranslator do
   end
 end
 
-describe RomanNumeralGenerator do
+describe RomanNumeral::Generator do
   describe "#generate" do
 
     it "takes 1 and returns I" do
