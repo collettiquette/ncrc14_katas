@@ -54,7 +54,7 @@ module RomanNumeral
           num_count = 1
         end
 
-        correct_numeral_syntax(numeral,i) if num_count == 4 && numeral != "M"
+        correct_numeral_syntax(numeral,i) if num_count == 4 && numeral != :M
       end
       @roman_numeral
     end
