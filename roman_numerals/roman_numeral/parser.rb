@@ -10,7 +10,7 @@ module RomanNumeral
     end
 
     def parse
-      if @input.class == Integer
+      if @input.class == Fixnum
         Generator.generate(@input) 
       else
         Translator.translate(@input)
