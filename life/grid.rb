@@ -17,11 +17,7 @@ class Grid
       end
     end
 
-    @cells.each do |row|
-      row.each do |cell|
-        cell.tick
-      end
-    end
+    @cells.each { |r| r.each { |c| c.tick } }
   end
 
   def display
